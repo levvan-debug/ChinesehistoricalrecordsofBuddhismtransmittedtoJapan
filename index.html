@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>古籍史籍收藏查询系统</title>
+<title>中国佛教史籍在日本的流传与演变</title>
 <style>
 * {
     margin: 0;
@@ -18,7 +18,6 @@ body {
     position: relative;
     min-height: 100vh;
 }
-/* 已修复：你的背景图 + 直链 + 75%透明度 */
 body::before {
     content: '';
     position: fixed;
@@ -142,11 +141,68 @@ td {
     border: 1px solid #ddd;
     padding: 8px 12px;
 }
+
+/* ———— 新增：数据库公告弹窗 ———— */
+#noticeModal {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.noticeBox {
+    background: white;
+    max-width: 550px;
+    width: 100%;
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.noticeTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #c0392b;
+}
+.noticeText {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #333;
+}
+.noticeBtn {
+    background: #2980b9;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.noticeBtn:hover {
+    background: #1f618d;
+}
 </style>
 </head>
 
 <body>
-<h1 class="page-title">古籍史籍收藏查询系统</h1>
+
+<!-- ———— 新增：数据库公告 ———— -->
+<div id="noticeModal">
+    <div class="noticeBox">
+        <div class="noticeTitle">数据库公告</div>
+        <div class="noticeText">数据库测试中，通过搜索/点击《景德传灯录》进行体验</div>
+        <button class="noticeBtn" onclick="closeNotice()">我已知悉</button>
+    </div>
+</div>
+
+<h1 class="page-title">中国佛教史籍在日本的流传与演变</h1>
 <input class="search-box" id="search" placeholder="搜索书名、作者、版本、藏地..." oninput="search()">
 <div class="book-container" id="list"></div>
 
@@ -158,6 +214,11 @@ td {
 </div>
 
 <script>
+// ———— 公告关闭功能 ————
+function closeNotice() {
+    document.getElementById("noticeModal").style.display = "none";
+}
+
 const books = [
 {
     name: "法显传",
@@ -204,8 +265,6 @@ const books = [
     current: "御茶之水图书馆藏本",
     full: "empty"
 },
-
-// 景德传灯录 1
 {
     name: "景德传灯录",
     detail: "《景德传灯录》三十卷",
@@ -225,28 +284,12 @@ const books = [
 <tr><td>相关记载</td><td>有</td></tr>
 <tr><td>参考文献</td><td>有</td></tr>
 </table>
-
 <div class="detail-section" style="margin-top:20px"><strong>二、史籍信息细节</strong></div>
-
-<div class="detail-section"><strong>（一）史籍基本信息：</strong><br>
-《景德传灯录》由北宋苏州承天寺僧人释道原编撰，初名《佛祖同参集》，成书于宋真宗景德年间（1004—1007），为佛教禅宗首部以“灯录”命名的史传著作。道原编成后经杨亿等人勘定，宋真宗敕令编入大藏经流通。</div>
-
-<div class="detail-section"><strong>（二）作者信息：</strong><br>
-道原，北宋法眼宗禅僧，属天台德韶法系。系天台韶国师之嗣，法眼清凉益之孙。</div>
-
-<div class="detail-section"><strong>（三）成书年代：</strong><br>
-景德三年<br>
-相关史料：<br>
-据王随《传灯玉英集》后序记载，“文明武定章圣元孝皇帝在宥之九载，有江吴僧道源采七佛而下暨历世高贤尊宿言句，编成传灯录三十轴，诣阙进焉。寻诏名臣刊修臻毕，遂成钜典，模印颁行。”可知释道原《景德传灯录》于宋真宗在位第九年，即景德三年（1006）书成诣阙上进。</div>
-
-<div class="detail-section"><strong>（四）传日时间：</strong><br>
-无准确时间，据史料有：熙宁-元丰年间、淳祐年间<br>
-相关史料：<br>
-据《参天台五台山记》的记载，日本延历寺阿暗梨成寻于后三条延久四年(1072年)由杭州登陆入宋，巡游汴京、天台、五台等，并谒见宋神宗。成寻将从中国得到的经藏，委托给随行的五位弟子，陆续携带归国，本人于宋神宗元丰四年(1081年)卒于汴京开宝寺。宋神宗曾赠送成寻经藏四百十三卷，已被送回日本。其中有《景德传灯录》一部共三十三卷。四条天皇仁治二年(1241年)日本东福寺开山圣一国师圆尔辩圆自中国归，携回汉籍内外文献数千卷。1353年东福寺第二十八世大道一以据圣一国师藏书编纂成《普门院经论章疏语录儒书等目录》。其“宿部”着录《传灯录》一部三十册;其“张部”著录《传灯录》一部五册。</div>
-
-<div class="detail-section"><strong>（五）相关记载：</strong><br>
-1. 中日汉文大藏经收录细目</div>
-
+<div class="detail-section"><strong>（一）史籍基本信息：</strong><br>《景德传灯录》由北宋苏州承天寺僧人释道原编撰，初名《佛祖同参集》，成书于宋真宗景德年间（1004—1007），为佛教禅宗首部以“灯录”命名的史传著作。道原编成后经杨亿等人勘定，宋真宗敕令编入大藏经流通。</div>
+<div class="detail-section"><strong>（二）作者信息：</strong><br>道原，北宋法眼宗禅僧，属天台德韶法系。系天台韶国师之嗣，法眼清凉益之孙。</div>
+<div class="detail-section"><strong>（三）成书年代：</strong><br>景德三年<br>相关史料：<br>据王随《传灯玉英集》后序记载，“文明武定章圣元孝皇帝在宥之九载，有江吴僧道源采七佛而下暨历世高贤尊宿言句，编成传灯录三十轴，诣阙进焉。寻诏名臣刊修臻毕，遂成钜典，模印颁行。”可知释道原《景德传灯录》于宋真宗在位第九年，即景德三年（1006）书成诣阙上进。</div>
+<div class="detail-section"><strong>（四）传日时间：</strong><br>无准确时间，据史料有：熙宁-元丰年间、淳祐年间<br>相关史料：<br>据《参天台五台山记》的记载，日本延历寺阿暗梨成寻于后三条延久四年(1072年)由杭州登陆入宋，巡游汴京、天台、五台等，并谒见宋神宗。成寻将从中国得到的经藏，委托给随行的五位弟子，陆续携带归国，本人于宋神宗元丰四年(1081年)卒于汴京开宝寺。宋神宗曾赠送成寻经藏四百十三卷，已被送回日本。其中有《景德传灯录》一部共三十三卷。四条天皇仁治二年(1241年)日本东福寺开山圣一国师圆尔辩圆自中国归，携回汉籍内外文献数千卷。1353年东福寺第二十八世大道一以据圣一国师藏书编纂成《普门院经论章疏语录儒书等目录》。其“宿部”着录《传灯录》一部三十册;其“张部”著录《传灯录》一部五册。</div>
+<div class="detail-section"><strong>（五）相关记载：</strong><br>1. 中日汉文大藏经收录细目</div>
 <table>
 <tr><td>【崇宁藏】</td><td>No.1270《景德传灯录》 卷数：30 千字文：振(511)-世(513)</td></tr>
 <tr><td>【毘卢藏】</td><td>No.1271《景德传灯录》宋道原纂 千字文：振(511)-世(513)</td></tr>
@@ -265,19 +308,8 @@ const books = [
 <tr><td>【佛教大藏經】</td><td>No.1990《景德传灯录》宋 道原纂 部别：诸宗部三 禅宗 册数：70-71</td></tr>
 <tr><td>【中華藏】</td><td>No.1683《景德传灯录》僧道原纂 册数：74 底本：金藏广胜寺本</td></tr>
 </table>
-
-<div class="detail-section"><strong>（六）参考文献：</strong><br>
-【1】王随《传灯玉英集·残卷》, 台北:新文丰出版股份有限公司, 1993年, 第441页。<br>
-【2】志磐《佛祖统纪》, 江苏广陵古籍刻印社, 1992年。<br>
-【3】郭声波点校,《宋会要辑稿·蕃夷道释》, 成都: 四川大学出版社, 2010年。<br>
-【4】脱脱等撰, 中华书局编辑部点校, 《宋史》, 北京: 中华书局, 1985年。<br>
-【5】陈垣《中国佛教史籍概论》, 上海书店出版社, 1999年, 第74页。<br>
-【6】严绍璗《日藏汉籍善本书录》, 北京:中华书局, 2007年。<br>
-【7】[日]石井修道《宋代禅籍逸书序跋考》, 《驹泽大学佛教学部论集》第8卷, 1977年。<br>
-【8】[日]释成寻原著, 白化文, 李鼎霞校点,《参天台五台山记》, 石家庄:花山文艺出版社, 2008年。</div>`
+<div class="detail-section"><strong>（六）参考文献：</strong><br>【1】王随《传灯玉英集·残卷》, 台北:新文丰出版股份有限公司, 1993年, 第441页。<br>【2】志磐《佛祖统纪》, 江苏广陵古籍刻印社, 1992年。<br>【3】郭声波点校,《宋会要辑稿·蕃夷道释》, 成都: 四川大学出版社, 2010年。<br>【4】脱脱等撰,中华书局编辑部点校,《宋史》,北京:中华书局,1985年。<br>【5】陈垣《中国佛教史籍概论》,上海书店出版社,1999年,第74页。<br>【6】严绍璗《日藏汉籍善本书录》,北京:中华书局,2007年。<br>【7】[日]石井修道《宋代禅籍逸书序跋考》,《驹泽大学佛教学部论集》第8卷,1977年。<br>【8】[日]释成寻原著,白化文,李鼎霞校点,《参天台五台山记》,石家庄:花山文艺出版社,2008年。</div>`
 },
-
-// 景德传灯录 2
 {
     name: "景德传灯录",
     detail: "《景德传灯录》三十卷",
@@ -305,7 +337,6 @@ const books = [
 <div class="detail-section"><strong>（五）相关记载：</strong><br>中日汉文大藏经均有收录</div>
 <div class="detail-section"><strong>（六）参考文献：</strong><br>【1】王随《传灯玉英集·残卷》<br>【2】志磐《佛祖统纪》<br>【3】郭声波点校《宋会要辑稿·蕃夷道释》<br>【4】脱脱《宋史》<br>【5】陈垣《中国佛教史籍概论》<br>【6】严绍璗《日藏汉籍善本书录》<br>【7】[日]石井修道《宋代禅籍逸书序跋考》<br>【8】[日]释成寻《参天台五台山记》</div>`
 },
-
 {
     name: "禅林僧宝传",
     detail: "《禅林僧宝传》（残本）七卷",
@@ -351,8 +382,6 @@ const books = [
     current: "东北大学附属图书馆藏本",
     full: "empty"
 },
-
-// 景德传灯录 3
 {
     name: "景德传灯录",
     detail: "《景德传灯录》三十卷",
@@ -382,7 +411,6 @@ const books = [
 }
 ];
 
-// 全局保存搜索结果
 let currentResult = [];
 
 function render(list) {
@@ -408,7 +436,6 @@ function search() {
     render(res);
 }
 
-// 已修复：搜索后也能正确打开详情
 function openDetail(i) {
     const b = currentResult[i];
     if (b.full === "empty") {
